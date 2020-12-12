@@ -15,9 +15,9 @@ before_script:
 
 script:
   - docker --version # print the version for logging
-  - docker build -t simple-node --build-arg TEST_ENV_VAR=${TEST_ENV_VAR} .
-  - docker tag simple-node martinenzinger/simple-node:latest
+  - docker build -t travis-env-vars --build-arg TEST_ENV_VAR=${TEST_ENV_VAR} .
+  - docker tag travis-env-vars martinenzinger/travis-env-vars:latest
 
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push martinenzinger/simple-node
+  - docker push martinenzinger/travis-env-vars
